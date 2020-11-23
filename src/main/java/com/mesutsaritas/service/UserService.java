@@ -7,6 +7,7 @@ import com.mesutsaritas.model.User;
 import com.mesutsaritas.repository.UserRepository;
 import com.mesutsaritas.resource.UserResource;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -14,6 +15,7 @@ import reactor.core.publisher.Mono;
  * @author msaritas
  *
  */
+@Slf4j
 @Service
 public class UserService {
 
@@ -61,6 +63,7 @@ public class UserService {
         user.setLastName(userResource.getLastName());
         user.setAddress(userResource.getAddress());
 
+        log.info("[UserService][create][User created!]");
         return userRepository.save(user).map(u -> {
             User userFromDB = new User();
             userFromDB.setId(u.getId());
